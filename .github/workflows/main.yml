@@ -16,7 +16,12 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: 3.12
+
+    - name: Prerequisites
+      run: |
+          poetry install --with dev
+
 
     - name: Install dependencies
       run: |
