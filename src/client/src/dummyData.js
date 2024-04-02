@@ -1,0 +1,33 @@
+const stationNames = {
+  station_1: "VZAJEMNA, VARUH ZDRAVJA - BETNAVSKA C.",
+  station_2: "TELEMACH - GLAVNI TRG - STARI PERON",
+  station_3: "NKBM - TRG LEONA ŠTUKLJA",
+  station_4: "PARTIZANSKA C. - ŽELEZNIŠKA POSTAJA",
+  station_5: "EUROPARK - POBREŠKA C.",
+  station_6: "STROSSMAYERJEVA UL. - TRŽNICA",
+  station_7: "GOSPOSVETSKA C. - TURNERJEVA UL.",
+  station_8: "KOROŠKA C. - KOROŠKI VETER",
+  station_9: "GOSPOSVETSKA C. - III. GIMNAZIJA",
+  station_10: "GORKEGA UL. - OŠ FRANCETA PREŠERNA",
+  station_11: "POŠTA - SLOMŠKOV TRG",
+  station_12: "DVORANA TABOR",
+  station_13: "ULICA MOŠE PIJADA - UKC",
+  station_14: "LIDL - TITOVA C.",
+  station_15: "SPAR - TRŽNICA TABOR",
+  station_16: "NA POLJANAH - HEROJA ŠERCERJA",
+  station_17: "UM FGPA - LENT - SODNI STOLP",
+  station_18: "RAZLAGOVA UL. - OBČINA",
+  station_19: "PARTIZANSKA C. - TIC",
+  station_20: "GOSPOSVETSKA C. - VRBANSKA C.",
+  station_21: "MLADINSKA UL. - TRUBARJEVA UL.",
+  station_22: "MLINSKA UL . - AVTOBUSNA POSTAJA",
+  station_23: "PETROL – LENT – VODNI STOLP",
+  station_24: "LJUBLJANSKA UL. - II. GIMNAZIJA",
+  station_25: "NICEHASH - C. PROLETARSKIH BRIGAD",
+  station_26: "LJUBLJANSKA UL. - FOCHEVA",
+  station_27: "JHMB – DVOETAŽNI MOST",
+  station_28: "LIDL - KOROŠKA C.",
+  station_29: "PARTIZANSKA C. - CANKARJEVA UL."
+};
+
+export default stationNames;
