@@ -111,12 +111,13 @@ def fetch_bike_data(url):
 def save_raw_bike_data(data):
     if data is not None:
         raw_data_directory = "../../data/raw/mbajk"
+        if not os.path.exists(raw_data_directory):
+            os.makedirs(raw_data_directory)
         for station in data:
             filename = f"station_{station['number']}.csv"
             file_path = os.path.join(raw_data_directory, filename)
             # Check if the file exists
             file_exists = os.path.isfile(file_path)
-
             # Process 'position' column
             position = station['position']
             latitude = position['lat']
@@ -143,6 +144,8 @@ def fetch_weather_data(url):
 def save_raw_weather_data(data, location):
     if data is not None:
         raw_weather_directory = "../../data/raw/weather"
+        if not os.path.exists(raw_weather_directory):
+            os.makedirs(raw_weather_directory)
         filename = f"{location}_weather.csv"
         file_path = os.path.join(raw_weather_directory, filename)
 
