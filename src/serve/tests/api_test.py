@@ -13,7 +13,7 @@ def test_health_check():
 
 def test_predict():
     response = client.post(
-        "/mbajk/predict",
+        "/mbajk/predict/station_1",
         json=[
         {
         "available_bike_stands": 15,
@@ -45,10 +45,10 @@ def test_predict():
     assert response.json()["prediction"] >= 0
     assert response.json()["prediction"] <= 100
 
-''' 
+'''
 def test_predict_fail():
     response = client.post(
-        "/mbajk/predict",
+        "/mbajk/predict/station_1",
         json=[
         {
         "available_bike_stands": 15,
