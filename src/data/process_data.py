@@ -36,6 +36,8 @@ def process_and_save_data(input_directory, output_directory):
 
 def read_weather_data(weather_path):
     weather_data = []
+    if(not os.path.exists(weather_path)):
+        os.mkdir(weather_path)
     with open(weather_path, 'r', newline='') as weather_file:
         reader = csv.DictReader(weather_file)
         for row in reader:
