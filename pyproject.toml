@@ -16,7 +16,6 @@ matplotlib = "^3.8.3"
 seaborn = "^0.13.2"
 tensorflow = "^2.15.0.post1"
 uvicorn = { extras = ["standard"], version = "^0.29.0" }
-tensorflow-intel = "^2.15.0.post1"
 fastapi = "^0.110.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -25,6 +24,9 @@ poethepoet = "^0.25.0"
 pytest = "^8.1.1"
 ruff = "^0.3.2"
 
+[tool.poetry.group.win-dev.dependencies]
+tensorflow-intel = "^2.16.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
@@ -32,4 +34,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.poe.tasks]
 fetch = "python3 -m src.data.fetch_data"
 process = "python3 -m src.data.process_data"
+test = "pytest"
 
