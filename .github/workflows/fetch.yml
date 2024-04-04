@@ -42,9 +42,6 @@ jobs:
         run: |
           poetry run poe fetch
 
-      - name: Process data
-        run: |
-          poetry run poe process
 
       - name: Commit and push data
         run: |
