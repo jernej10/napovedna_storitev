@@ -34,10 +34,6 @@ jobs:
         run: |
           poetry install --with dev --without win-dev
 
-      - name: DVC pull
-        run: |
-          dvc pull -r origin
-
       - name: Fetch bike data
         run: |
           poetry run poe fetch-bike-data
