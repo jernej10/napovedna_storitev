@@ -1,4 +1,4 @@
-name: Fetch and Process Data
+name: Fetch Data
 
 on:
   schedule:
@@ -38,10 +38,13 @@ jobs:
         run: |
           dvc pull -r origin
 
-      - name: Fetch data
+      - name: Fetch bike data
         run: |
-          poetry run poe fetch
+          poetry run poe fetch-bike-data
 
+      - name: Fetch weather data
+        run: |
+          poetry run poe fetch-weather-data
 
       - name: Commit and push data
         run: |

@@ -32,7 +32,8 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poe.tasks]
-fetch = "python3 -m src.data.fetch_data"
+fetch-bike-data = "python3 -m src.data.fetch-bike-data"
+fetch-weather-data = "python3 -m src.data.fetch_weather_data"
 process = "python3 -m src.data.process_data"
 test = "pytest"
 
