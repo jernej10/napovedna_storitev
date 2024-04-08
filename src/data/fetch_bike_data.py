@@ -14,7 +14,7 @@ def fetch_bike_data(url):
 
 def save_raw_bike_data(data):
     if data is not None:
-        raw_data_directory = "../../data/raw/mbajk"
+        raw_data_directory = "data/raw/mbajk"
         if not os.path.exists(raw_data_directory):
             os.makedirs(raw_data_directory)
         for station in data:

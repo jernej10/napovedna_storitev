@@ -14,7 +14,7 @@ def fetch_weather_data(url):
 
 def save_raw_weather_data(data, location):
     if data is not None:
-        raw_weather_directory = "../../data/raw/weather"
+        raw_weather_directory = "data/raw/weather"
         if not os.path.exists(raw_weather_directory):
             os.makedirs(raw_weather_directory)
         filename = f"{location}_weather.csv"
