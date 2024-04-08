@@ -73,6 +73,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\raw\mbajk\station_5.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\raw\mbajk\station_7.csv">
           <value>
             <Attribute>
