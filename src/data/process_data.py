@@ -20,12 +20,11 @@ def process_and_save_data(input_directory, output_directory):
             if input_modification_time > output_modification_time:
                 with open(input_path, 'r', newline='') as mbajk_file, open(output_path, 'w', newline='') as outfile:
                     reader = csv.DictReader(mbajk_file)
-                    writer = csv.DictWriter(outfile, fieldnames=['bike_stands', 'available_bike_stands'])
+                    writer = csv.DictWriter(outfile, fieldnames=['available_bike_stands'])
                     writer.writeheader()
 
                     for row in reader:
                         processed_row = {
-                            'bike_stands': row['bike_stands'],
                             'available_bike_stands': row['available_bike_stands']
                         }
                         writer.writerow(processed_row)
@@ -77,9 +76,9 @@ def merge_with_weather(csv_directory, weather_data):
              #   print(f"No changes detected.")
 
 def main():
-    process_and_save_data('../../data/raw/mbajk', '../../data/processed')
-    weather_data = read_weather_data('../../data/raw/weather/maribor_weather.csv')
-    merge_with_weather('../../data/processed', weather_data)
+    process_and_save_data('data/raw/mbajk', '../../data/processed')
+    weather_data = read_weather_data('/data/raw/weather/maribor_weather.csv')
+    merge_with_weather('data/processed', weather_data)
 
 if __name__ == "__main__":
     main()

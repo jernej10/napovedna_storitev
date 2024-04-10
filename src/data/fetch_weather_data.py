@@ -37,7 +37,7 @@ def main():
     weather_data_url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,wind_speed_10m,precipitation,dew_point_2m,relative_humidity_2m,apparent_temperature,surface_pressure"
     weather_data = fetch_weather_data(weather_data_url)
     print("Weather data: ", weather_data)
-    save_raw_weather_data(weather_data, "Maribor")
+    save_raw_weather_data(weather_data, "maribor")
 
 if __name__ == "__main__":
     main()

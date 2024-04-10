@@ -42,6 +42,10 @@ jobs:
         run: |
           poetry run poe fetch-weather-data
 
+      - name: Process data
+        run: |
+          poetry run poe process
+
       - name: Commit and push data
         run: |
           dvc add data
