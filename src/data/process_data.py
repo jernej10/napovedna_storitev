@@ -2,7 +2,6 @@ import os
 import csv
 
 
-# TODO dodaj vremenske podatke
 def process_and_save_data(input_directory, output_directory):
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
@@ -76,7 +75,7 @@ def merge_with_weather(csv_directory, weather_data):
              #   print(f"No changes detected.")
 
 def main():
-    process_and_save_data('data/raw/mbajk', '../../data/processed')
+    process_and_save_data('data/raw/mbajk', 'data/processed')
     weather_data = read_weather_data('/data/raw/weather/maribor_weather.csv')
     merge_with_weather('data/processed', weather_data)
 
