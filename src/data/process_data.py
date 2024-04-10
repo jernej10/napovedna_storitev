@@ -76,7 +76,7 @@ def merge_with_weather(csv_directory, weather_data):
 
 def main():
     process_and_save_data('data/raw/mbajk', 'data/processed')
-    weather_data = read_weather_data('/data/raw/weather/maribor_weather.csv')
+    weather_data = read_weather_data('data/raw/weather/maribor_weather.csv')
     merge_with_weather('data/processed', weather_data)
 
 if __name__ == "__main__":
