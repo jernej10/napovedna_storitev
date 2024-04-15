@@ -36,6 +36,6 @@ fetch-bike-data = "python3 -m src.data.fetch_bike_data"
 fetch-weather-data = "python3 -m src.data.fetch_weather_data"
 process = "python3 -m src.data.process_data"
 test = "pytest"
-test-remote-api = "pytest src/tests/remote_api_test.py"
+test-remote-api = "pytest src/serve/tests/remote_api_test.py"
 serve = "uvicorn src.serve.main:app --reload --port 8000"
 

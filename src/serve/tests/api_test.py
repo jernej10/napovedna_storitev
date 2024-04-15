@@ -8,6 +8,7 @@ def test_health_check():
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json() == {"status": "Api is up and running!"}
+
 '''
 def test_predict_future():
     response = client.post(
