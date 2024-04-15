@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - mbajk-forecast-network
+
+  client:
+    container_name: client
+    build:
+      context: src/client
+      dockerfile: Dockerfile
+
+    ports:
+      - "3000:3000"
+    networks:
+      - mbajk-forecast-network
+
+networks:
+    mbajk-forecast-network:
+        driver: bridge

@@ -81,7 +81,6 @@ router = APIRouter(
 
 class PredictionInput(BaseModel):
     available_bike_stands: int
-    bike_stands: int
     temperature: float
     relative_humidity: float
     dew_point: float
@@ -101,8 +100,8 @@ def predict(station_name: str, data: List[PredictionInput]):
         raise HTTPException(status_code=400, detail=f"Data must contain {window_size} items")
 
     print(f"Predicting for station {station_name}")
-    model_path = f"../../models/{station_name}/model.keras"
-    scaler_path = f"../../models/{station_name}/minmax_scaler.gz"
+    model_path = f"models/{station_name}/model.keras"
+    scaler_path = f"models/{station_name}/minmax_scaler.gz"
 
     try:
         model = load_model(model_path)
@@ -110,7 +109,7 @@ def predict(station_name: str, data: List[PredictionInput]):
     except Exception as e:
         raise HTTPException(status_code=404, detail=f"Failed to load model or scaler: {e}")
 
-    data = [[data_slice.available_bike_stands, data_slice.bike_stands, data_slice.temperature,
+    data = [[data_slice.available_bike_stands, data_slice.temperature,
              data_slice.relative_humidity, data_slice.dew_point, data_slice.apparent_temperature, data_slice.precipitation, data_slice.wind_speed, data_slice.surface_pressure] for data_slice in data]
 
     scaled_data = scaler.transform(data)
@@ -126,12 +125,11 @@ def predict(station_name: str, data: List[PredictionInput]):
 def predict_7_hours(station_name: str, hours: int):
     # Preberi CSV in izberi zadnje window_size*2 vrstic
     try:
-        df = pd.read_csv(f"../../data/processed/{station_name}.csv")
+        df = pd.read_csv(f"data/processed/{station_name}.csv")
         last_rows = df.tail(window_size)
         data = [
             PredictionInput(
                 available_bike_stands=row.available_bike_stands,
-                bike_stands=row.bike_stands,
                 temperature=row.temperature,
                 relative_humidity=row.relative_humidity,
                 dew_point=row.dew_point,
@@ -159,7 +157,6 @@ def predict_7_hours(station_name: str, hours: int):
         data.append(
             PredictionInput(
                 available_bike_stands=prediction['prediction'],  # Uporabi napoved iz prejšnje iteracije
-                bike_stands=data[-1].bike_stands,  # Podatki o številu koles
                 temperature=current_weather_data.temperature,
                 relative_humidity=current_weather_data.relative_humidity,
                 dew_point=current_weather_data.dew_point,

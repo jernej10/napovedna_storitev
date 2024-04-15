@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.responses import RedirectResponse
-from routers import health_router, prediction_router
+from src.serve.routers import health_router, prediction_router
 
 app = FastAPI()
 
@@ -24,3 +23,4 @@ def root():
     return {"message": "Hello, FastAPI!"}
 
 # RUN -> uvicorn main:app --reload
+# RUN in root -> uvicorn src.serve.main:app --reload --port 8000

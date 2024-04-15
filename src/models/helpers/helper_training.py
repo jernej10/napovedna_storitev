@@ -87,3 +87,13 @@ def create_multivariate_time_series(data, window_size):
             X.append(data[i - window_size:i, 0:data.shape[1]])
             y.append(data[i,0])
     return np.array(X), np.array(y)
+
+'''
+def create_multivariate_time_series(data, window_size):
+    X, y = [], []
+    for i in range(window_size, len(data)):
+        X.append(data[i - window_size:i, :])  # Use all features for each timestep
+        y.append(data[i, 0])  # Assuming the target is the first column
+    return np.array(X), np.array(y)
+
+'''

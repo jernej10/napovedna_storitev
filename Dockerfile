@@ -1,34 +1,28 @@
-ARG PYTHON_VERSION=3.12.2
+FROM python:3.12-slim as builder
 
-FROM python:${PYTHON_VERSION}  as requirements-stage
+RUN pip install poetry==1.4.2
 
-WORKDIR /tmp
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_CACHE_DIR=/tmp/poetry_cache
 
-RUN pip install poetry
+WORKDIR /app
 
-COPY ./pyproject.toml ./poetry.lock* /tmp/
+COPY pyproject.toml poetry.lock ./
+RUN touch README.md
 
-RUN pip install --upgrade pip setuptools wheel
+RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --without dev --without win-dev --no-root
 
+FROM python:3.12-slim as runtime
 
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
+ENV VIRTUAL_ENV=/app/.venv \
+    PATH="/app/.venv/bin:$PATH"
 
-FROM python:${PYTHON_VERSION} as runner
+COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
-# Prevents Python from writing pyc files to disc
-ENV PYTHONDONTWRITEBYTECODE=1
+COPY . ./app
 
-# Prevents Python from buffering stdout and stderr
-ENV PYTHONUNBUFFERED=1
-
-WORKDIR /code
-
-COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
-
-RUN apt-get update && apt-get install -y libhdf5-dev
-
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
-
-COPY . /code
+WORKDIR /app
 
 CMD ["uvicorn", "src.serve.main:app", "--host", "0.0.0.0", "--port", "8000"]
