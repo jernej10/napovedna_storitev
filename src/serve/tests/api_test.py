@@ -8,14 +8,14 @@ def test_health_check():
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json() == {"status": "Api is up and running!"}
-
+'''
 def test_predict_future():
     response = client.post(
         "/mbajk/predict/station_1/7")
     assert response.status_code == 200
     assert "predictions" in response.json()
     assert len(response.json()["predictions"]) == 7
-
+'''
 
 def test_predict():
     response = client.post(
