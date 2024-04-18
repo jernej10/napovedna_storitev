@@ -46,9 +46,17 @@ jobs:
         run: |
           poetry run poe fetch-weather-data
 
+      - name: Copy processed data as reference_data.csv
+        run: |
+          cp data/processed/station_1.csv data/reference_data.csv
+
       - name: Process data
         run: |
           poetry run poe process
+
+      - name: Copy processed data as current_data.csv
+        run: |
+          cp data/processed/station_1.csv data/current_data.csv
 
       - name: Commit and push data
         run: |
