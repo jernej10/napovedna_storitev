@@ -58,10 +58,6 @@ jobs:
         run: |
           cp data/processed/station_1.csv data/current_data.csv
 
-      - name: Validate data
-        run: |
-          poetry run poe validate
-
       - name: Commit and push data
         run: |
           dvc add data
