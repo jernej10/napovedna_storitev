@@ -58,6 +58,10 @@ jobs:
         run: |
           cp data/processed/station_1.csv data/current_data.csv
 
+      - name: Validate data
+        run: |
+          poetry run great_expectations checkpoint run my_checkpoint
+
       - name: Commit and push data
         run: |
           dvc add data

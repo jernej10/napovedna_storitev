@@ -3,6 +3,13 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\data\current_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\processed\station_1.csv">
           <value>
             <Attribute>
@@ -109,6 +116,13 @@
           </value>
         </entry>
         <entry key="\data\raw\weather\maribor_weather.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\reference_data.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
