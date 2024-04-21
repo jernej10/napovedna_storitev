@@ -42,4 +42,5 @@ process = "python3 -m src.data.process_data"
 test = "pytest"
 test-remote-api = "pytest src/serve/tests/remote_api_test.py"
 serve = "uvicorn src.serve.main:app --reload --port 8000"
+validate = "python3 -m src.data.scripts.run_checkpoint"
 

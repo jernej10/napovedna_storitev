@@ -60,7 +60,7 @@ jobs:
 
       - name: Validate data
         run: |
-          poetry run great_expectations checkpoint run my_checkpoint
+          poetry run poe validate
 
       - name: Commit and push data
         run: |
