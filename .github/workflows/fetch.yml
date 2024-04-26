@@ -140,10 +140,6 @@ jobs:
         run: |
           poetry install --with dev --without win-dev
 
-      - name: Get reference data
-        run: |
-          dvc get . data/current_data.csv --rev $SHA_FETCH --out data/reference_data.csv --force
-
       - name: Run validation
         run: |
           poetry run poe validate
