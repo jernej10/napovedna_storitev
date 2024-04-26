@@ -16,9 +16,9 @@ def main():
     #current = dm.get_dataframe("processed", "current_data")
     #dm.save("processed", "reference_data", current, override=True)
 
-    #current_data = pd.read_csv("data/current_data.csv")
-    #reference_data_path = "data/reference_data.csv"
-    #current_data.to_csv(reference_data_path, index=False)
+    current_data = pd.read_csv("data/current_data.csv")
+    reference_data_path = "data/reference_data.csv"
+    current_data.to_csv(reference_data_path, index=False)
 
 if __name__ == "__main__":
     main()

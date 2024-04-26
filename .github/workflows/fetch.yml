@@ -50,10 +50,6 @@ jobs:
         run: |
           poetry run poe process
 
-      - name: DVC pull
-        run: |
-          dvc pull -r origin
-
       - name: Get reference data
         run: |
           dvc get . data/current_data.csv --rev $SHA_FETCH --out data/reference_data.csv --force
