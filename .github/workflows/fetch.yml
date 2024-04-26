@@ -79,6 +79,12 @@ jobs:
           dvc remote modify origin --local secret_access_key ${{ secrets.DVC_SECRET_ACCESS_KEY }}
           dvc pull -r origin
 
+      - name: Pull data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git pull
+
       - name: Install dependencies
         run: |
           poetry install --with dev --without win-dev
