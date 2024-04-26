@@ -54,6 +54,14 @@ jobs:
         run: |
           dvc get . data/current_data.csv --rev $SHA_FETCH --out data/reference_data.csv --force
 
+      - name: Run validation
+        run: |
+          poetry run poe validate
+
+      - name: Copy current data into reference data
+        run: |
+          cp data/current_data.csv data/reference_data.csv
+
       - name: Commit and push data
         run: |
           dvc add data
