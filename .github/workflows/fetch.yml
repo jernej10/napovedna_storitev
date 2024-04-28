@@ -140,9 +140,9 @@ jobs:
         run: |
           poetry install --with dev --without win-dev
 
-      - name: Run validation
+      - name: Run Kolmogorov-Smirnov test
         run: |
-          poetry run poe validate
+          poetry run poe ks_test
 
       - name: Commit and push data
         run: |
