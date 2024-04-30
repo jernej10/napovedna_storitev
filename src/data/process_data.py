@@ -55,10 +55,6 @@ def merge_with_weather(csv_directory, weather_data):
     for filename in os.listdir(csv_directory):
         if filename.endswith(".csv"):
             csv_path = os.path.join(csv_directory, filename)
-            #weather_timestamp = os.path.getmtime("../../data/raw/weather/maribor_weather.csv")
-            #csv_timestamp = os.path.getmtime(csv_path)
-
-            #if weather_timestamp > csv_timestamp:  # Preverimo, ali se je datoteka s podatki o vremenu spremenila
             output_rows = []
             with open(csv_path, 'r', newline='') as csv_file:
                 reader = csv.DictReader(csv_file)
@@ -71,8 +67,23 @@ def merge_with_weather(csv_directory, weather_data):
                 writer = csv.DictWriter(csv_file, fieldnames=output_rows[0].keys())
                 writer.writeheader()
                 writer.writerows(output_rows)
-            #else:
-             #   print(f"No changes detected.")
+
+            # Shranimo posodobljene vrstice v ustrezno mapo
+            station_number = filename.split('_')[1].split('.')[0]
+            save_merged_data_for_validation(output_rows, station_number, 'data/validation')
+
+
+def save_merged_data_for_validation(merged_data, station_number, output_directory):
+    station_directory = os.path.join(output_directory, f'station_{station_number}')
+    if not os.path.exists(station_directory):
+        os.makedirs(station_directory)
+
+    output_path = os.path.join(station_directory, 'current_data.csv')
+
+    with open(output_path, 'w', newline='') as outfile:
+        writer = csv.DictWriter(outfile, fieldnames=merged_data[0].keys())
+        writer.writeheader()
+        writer.writerows(merged_data)
 
 def main():
     process_and_save_data('data/raw/mbajk', 'data/processed')
