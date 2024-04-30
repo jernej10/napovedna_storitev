@@ -139,6 +139,10 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install --with dev --without win-dev
+
+      - name: Run validation
+        run: |
+          poetry run poe validate
       
       - name: Run Data Drift
         run: |
@@ -163,14 +167,12 @@ jobs:
 
       - name: Commit and push data
         run: |
-          dvc add data
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
           git pull
           git diff-index --quiet HEAD || (git commit -a -m "action: fetch latest data" --allow-empty)
           git push
-          dvc push -r origin
 
   train:
     runs-on: ubuntu-latest
