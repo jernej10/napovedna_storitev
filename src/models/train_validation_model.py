@@ -28,7 +28,7 @@ def prepare_and_train_model(station_number: int) -> None:
     model = train_model(dataset=dataset, scaler=scaler, build_model_fn=build_model, epochs=epochs, batch_size=batch_size, verbose=0)
     save_model(model, scaler, station_number, "model", "minmax", f"models/validation/station_{station_number}")
 
-    mlflow.start_run(run_name=f"MBAJK station {station_number}", experiment_id="1")
+    mlflow.start_run(run_name=f"MBAJK station {station_number}")
     mlflow.log_param("epochs", epochs)
     mlflow.log_param("batch_size", batch_size)
 
