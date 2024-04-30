@@ -52,7 +52,7 @@ def prepare_and_train_model(station_number: int) -> None:
     epochs = 50
     batch_size = 7
     window_size = 2
-    top_features = 9
+    top_features = 8
 
     # Get the scaler from the pipeline
     scaler = transformer.named_transformers_['pipeline'].named_steps['scaler']
