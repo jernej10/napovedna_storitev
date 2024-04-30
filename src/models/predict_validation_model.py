@@ -48,7 +48,7 @@ def predict_model(station_number):
 def main():
     test_files = glob("data/validation/station_*/test.csv")
 
-    dh_auth.add_app_token(token="2ea1892ddf473f9f3b467201b8497b5e7c6eade0")
+    dh_auth.add_app_token(token=os.getenv("DAGSHUB_TOKEN"))
     dagshub.init('napovedna_storitev', 'jernej10', mlflow=True)
     mlflow.set_tracking_uri('https://dagshub.com/jernej10/napovedna_storitev.mlflow')
 
