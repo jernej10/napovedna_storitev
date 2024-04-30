@@ -9,8 +9,8 @@ def split_data_for_station(station_directory):
 
     test_size = int(0.1 * len(current_data))
 
-    test_data = current_data.head(test_size)
-    train_data = current_data.iloc[test_size:]
+    test_data = current_data.tail(test_size)
+    train_data = current_data.iloc[:-test_size]
 
     test_data.to_csv(os.path.join(station_directory, 'test.csv'), index=False)
     train_data.to_csv(os.path.join(station_directory, 'train.csv'), index=False)
