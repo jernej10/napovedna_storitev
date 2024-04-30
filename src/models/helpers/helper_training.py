@@ -9,20 +9,40 @@ from keras.src.layers import LSTM
 from sklearn.metrics import mean_squared_error, mean_absolute_error, explained_variance_score
 from sklearn.preprocessing import MinMaxScaler
 from typing import Tuple
+import tensorflow_model_optimization as tfmot
+import tf_keras
+from tensorflow_model_optimization.python.core.quantization.keras.default_8bit import default_8bit_quantize_scheme
 
 window_size = 2
 
-def build_model(input_shape):
-    model = Sequential()
-    model.add(LSTM(32, input_shape=input_shape, return_sequences=True))
-    model.add(Dropout(0.0))
-    model.add(LSTM(32))
-    model.add(Dropout(0.0))
-    model.add(Dense(16, activation='relu'))
-    model.add(Dense(1))
+def build_model(input_shape: tuple[int, int]) -> tf_keras.Sequential:
+        quantize_annotate_layer = tfmot.quantization.keras.quantize_annotate_layer
 
-    model.compile(optimizer='adam', loss='mean_squared_error')
-    return model
+        model = tf_keras.Sequential(name="GRU")
+
+        model.add(tf_keras.Input(shape=input_shape))
+        model.add(tf_keras.layers.GRU(units=128, return_sequences=True))
+        model.add(tf_keras.layers.Dropout(0.2))
+
+        model.add(tf_keras.layers.GRU(units=64, return_sequences=True))
+        model.add(tf_keras.layers.Dropout(0.2))
+
+        model.add(tf_keras.layers.GRU(units=32))
+
+        model.add(quantize_annotate_layer(tf_keras.layers.Dense(units=32, activation="relu")))
+        model.add(quantize_annotate_layer(tf_keras.layers.Dense(units=1)))
+
+        optimizer = tf_keras.optimizers.legacy.Adam(learning_rate=0.01)
+
+        model = tfmot.quantization.keras.quantize_apply(
+            model,
+            scheme=default_8bit_quantize_scheme.Default8BitQuantizeScheme(),
+            quantized_layer_name_prefix='quant_'
+        )
+
+        model.compile(optimizer=optimizer, loss="mean_squared_logarithmic_error")
+
+        return model
 
 
 def train_model(X_train: np.ndarray, y_train: np.ndarray, X_test: np.ndarray, y_test: np.ndarray, scaler: MinMaxScaler or None,

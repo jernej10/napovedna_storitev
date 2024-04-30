@@ -74,7 +74,7 @@ def predict_model(station_number):
     if mse_test < mse_production:
         update_production_model(station_number)
 
-    write_metrics_to_file(f"reports/{station_number}/metrics.txt", "LSTM", mse_test, mae_test, evs_test)
+    write_metrics_to_file(f"reports/{station_number}/metrics.txt", "GRU", mse_test, mae_test, evs_test)
 
     print(f"Test metrics for station {station_number} have been calculated!")
 
