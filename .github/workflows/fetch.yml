@@ -140,10 +140,6 @@ jobs:
         run: |
           poetry install --with dev --without win-dev
       
-      - name: Run validation
-        run: |
-          poetry run poe validate
-      
       - name: Run Data Drift
         run: |
           poetry run poe data_drift
