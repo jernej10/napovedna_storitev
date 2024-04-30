@@ -143,6 +143,14 @@ jobs:
       - name: Run validation
         run: |
           poetry run poe validate
+      
+      - name: Run Data Drift
+        run: |
+          poetry run poe data_drift
+
+      - name: Run Stability tests
+        run: |
+          poetry run poe stability_tests
 
       - name: Run Kolmogorov-Smirnov test
         run: |
