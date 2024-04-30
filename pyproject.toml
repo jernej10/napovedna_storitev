@@ -46,4 +46,7 @@ validate = "python3 -m src.data.run_checkpoint"
 data_drift = "python3 -m src.data.data_drift"
 stability_tests = "python3 -m src.data.stability_tests"
 ks_test = "python3 -m src.data.ks"
+split_data = "python3 -m src.data.split_data"
+train_validation = "python3 -m src.models.train_validation_model"
+predict_validation = "python3 -m src.models.predict_validation_model"
 
