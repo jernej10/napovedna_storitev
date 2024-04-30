@@ -28,21 +28,21 @@ def prepare_and_train_model(station_number: int) -> None:
     model = train_model(dataset=dataset, scaler=scaler, build_model_fn=build_model, epochs=epochs, batch_size=batch_size, verbose=0)
     save_model(model, scaler, station_number, "model", "minmax", f"models/validation/station_{station_number}")
 
-    #mlflow.start_run(run_name=f"MBAJK station {station_number}", experiment_id="1")
-    #mlflow.log_param("epochs", epochs)
-    #mlflow.log_param("batch_size", batch_size)
+    mlflow.start_run(run_name=f"MBAJK station {station_number}", experiment_id="1")
+    mlflow.log_param("epochs", epochs)
+    mlflow.log_param("batch_size", batch_size)
 
     print(f"Model for station {station_number} has been trained and saved!")
 
 def main():
     train_files = glob("data/validation/station_*/train.csv")  # Poiščemo vse datoteke train.csv v mapi vsake postaje
 
-    #dh_auth.add_app_token(token=os.getenv("DAGSHUB_TOKEN"))
-    #dagshub.init('napovedna_storitev', 'jernej10', mlflow=True)
-    #mlflow.set_tracking_uri('https://dagshub.com/jernej10/napovedna_storitev.mlflow')
+    dh_auth.add_app_token(token=os.getenv("DAGSHUB_TOKEN"))
+    dagshub.init('napovedna_storitev', 'jernej10', mlflow=True)
+    mlflow.set_tracking_uri('https://dagshub.com/jernej10/napovedna_storitev.mlflow')
 
-    #if mlflow.active_run():
-    #    mlflow.end_run()
+    if mlflow.active_run():
+        mlflow.end_run()
 
     for train_csv_path in train_files:
         station_number = int(os.path.basename(os.path.dirname(train_csv_path)).split("_")[1])  # Izvlečemo številko postaje iz poti

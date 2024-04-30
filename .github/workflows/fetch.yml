@@ -211,10 +211,14 @@ jobs:
           poetry run poe split_data
 
       - name: Validation train
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
           poetry run poe train_validation
 
       - name: Validation predict
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
           poetry run poe predict_validation
 
