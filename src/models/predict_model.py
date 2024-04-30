@@ -9,7 +9,7 @@ from src.models.helpers.helper_training import prepare_model_data, evaluate_mode
 
 
 def predict_model(station_number):
-    dataset = load_bike_station_dataset(f"station_{station_number}.csv")
+    dataset = load_bike_station_dataset(f"../../data/processed/station_{station_number}.csv")
     dataset.sort_values(by="date", inplace=True)
     dataset.drop(columns=["date"], inplace=True)
     # available_bike_stands on first column of dataset

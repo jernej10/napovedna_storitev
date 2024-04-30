@@ -8,7 +8,7 @@ from src.models.helpers.helper_training import train_model, save_model, build_mo
 
 def prepare_and_train_model(station_number: int) -> None:
     #dataset = load_bike_station_dataset(f"../../data/processed/mbajk_processed.csv")
-    dataset = load_bike_station_dataset(f"station_{station_number}.csv")
+    dataset = load_bike_station_dataset(f"../../data/processed/station_{station_number}.csv")
     dataset.sort_values(by="date", inplace=True)
     dataset.drop(columns=["date"], inplace=True)
     # available_bike_stands on first column of dataset

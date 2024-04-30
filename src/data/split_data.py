@@ -17,6 +17,9 @@ def split_data_for_station(station_directory):
 
 def main():
     validation_directory = 'data/validation'
+    if not os.path.exists(validation_directory):
+        os.makedirs(validation_directory)
+
     for station_directory in os.listdir(validation_directory):
         if station_directory.startswith('station_') and os.path.isdir(os.path.join(validation_directory, station_directory)):
             split_data_for_station(os.path.join(validation_directory, station_directory))

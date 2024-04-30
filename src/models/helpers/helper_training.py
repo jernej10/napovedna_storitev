@@ -67,12 +67,23 @@ def prepare_model_data(dataset: pd.DataFrame, scaler: MinMaxScaler):
 
     return X_train, y_train, X_test, y_test
 
+def prepare_validation_model_data(dataset: pd.DataFrame, scaler: MinMaxScaler):
+    # Predpostavimo, da imate testne podatke ločene v dataset, zato jih ne potrebujemo deliti na učne in testne podatke
+    scaled_data = scale_test_data(scaler, dataset)  # Skaliramo podatke
+    X, y = create_multivariate_time_series(scaled_data, window_size)  # Ustvarimo multivariatni časovni niz
+
+    return X, y
 
 def scale_data(scaler: MinMaxScaler, train_data: pd.DataFrame, test_data: pd.DataFrame) \
         -> Tuple[pd.DataFrame, pd.DataFrame]:
     train_data = scaler.fit_transform(train_data)
     test_data = scaler.transform(test_data)
     return train_data, test_data
+
+def scale_test_data(scaler: MinMaxScaler, test_data: pd.DataFrame) \
+        -> Tuple[pd.DataFrame, pd.DataFrame]:
+    test_data = scaler.transform(test_data)
+    return test_data
 
 def create_test_train_split(dataset: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     test_split = round(len(dataset) * 0.2)
