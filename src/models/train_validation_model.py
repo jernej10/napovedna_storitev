@@ -37,7 +37,7 @@ def prepare_and_train_model(station_number: int) -> None:
 def main():
     train_files = glob("data/validation/station_*/train.csv")  # Poiščemo vse datoteke train.csv v mapi vsake postaje
 
-    dh_auth.add_app_token(token=os.getenv("DAGSHUB_TOKEN"))
+    dh_auth.add_app_token(token="2ea1892ddf473f9f3b467201b8497b5e7c6eade0")
     dagshub.init('napovedna_storitev', 'jernej10', mlflow=True)
     mlflow.set_tracking_uri('https://dagshub.com/jernej10/napovedna_storitev.mlflow')
 
