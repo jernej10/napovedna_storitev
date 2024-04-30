@@ -36,7 +36,7 @@ def predict_model(station_number):
 
     #write_metrics_to_file(f"../../reports/station_{station_number}/test_metrics.txt", model.name, mse_test, mae_test, evs_test)
 
-    mlflow.start_run(run_name=f"MBAJK station {station_number}")
+    mlflow.start_run(run_name=f"MBAJK station {station_number}", nested=True)
     mlflow.log_metric("mse_test", mse_test)
     mlflow.log_metric("mae_test", mae_test)
     mlflow.log_metric("evs_test", evs_test)
