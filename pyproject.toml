@@ -21,6 +21,8 @@ great-expectations = "^0.18.12"
 evidently = "^0.4.19"
 mlflow = "^2.12.1"
 dagshub = "^0.3.25"
+tf2onnx = "^1.16.1"
+onnxruntime = "^1.17.3"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"

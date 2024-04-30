@@ -1,4 +1,4 @@
-name: Fetch Data
+name: Data Pipeline
 
 on:
   schedule:
@@ -174,7 +174,7 @@ jobs:
           git diff-index --quiet HEAD || (git commit -a -m "action: fetch latest data" --allow-empty)
           git push
 
-  train:
+  split_data:
     runs-on: ubuntu-latest
     needs: validation
 
@@ -209,18 +209,6 @@ jobs:
       - name: Split data
         run: |
           poetry run poe split_data
-
-      - name: Validation train
-        env:
-          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
-        run: |
-          poetry run poe train_validation
-
-      - name: Validation predict
-        env:
-          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
-        run: |
-          poetry run poe predict_validation
 
       - name: Commit and push data
         run: |
