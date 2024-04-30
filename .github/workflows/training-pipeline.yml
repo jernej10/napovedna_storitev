@@ -10,7 +10,6 @@ on:
 jobs:
   train:
     runs-on: ubuntu-latest
-    needs: validation
 
     steps:
       - uses: actions/checkout@v4
