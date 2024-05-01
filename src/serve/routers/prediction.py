@@ -7,6 +7,7 @@ from keras.models import load_model
 from pydantic import BaseModel
 import numpy as np
 import requests
+import onnxruntime as ort
 
 
 window_size = 2
@@ -65,7 +66,8 @@ def create_time_series(data, window_size, feature_cols):
 
 
 def use_model_prediction(data, model, scaler, feature_cols):
-    prediction = model.predict(data)
+    #prediction = model.predict(data)
+    prediction = model.run(["output"], {"input": data})[0]
     prediction_copies_array = np.repeat(prediction, len(feature_cols), axis=-1)
     prediction_reshaped = np.reshape(prediction_copies_array, (len(prediction), len(feature_cols)))
     prediction = scaler.inverse_transform(prediction_reshaped)[:, 0]
@@ -100,6 +102,8 @@ def predict(station_name: str, data: List[PredictionInput]):
         raise HTTPException(status_code=400, detail=f"Data must contain {window_size} items")
 
     print(f"Predicting for station {station_name}")
+
+    '''
     model_path = f"models/{station_name}/model.keras"
     scaler_path = f"models/{station_name}/minmax_scaler.gz"
 
@@ -108,7 +112,12 @@ def predict(station_name: str, data: List[PredictionInput]):
         scaler = joblib.load(scaler_path)
     except Exception as e:
         raise HTTPException(status_code=404, detail=f"Failed to load model or scaler: {e}")
+    '''
 
+    station_number = int(station_name.split('_')[1])
+
+    model = ort.InferenceSession(f"models/{station_number}/model_production.onnx")
+    scaler = joblib.load(f"models/{station_number}/minmax_scaler_production.gz")
     data = [[data_slice.available_bike_stands, data_slice.temperature,
              data_slice.relative_humidity, data_slice.dew_point, data_slice.apparent_temperature, data_slice.precipitation, data_slice.wind_speed, data_slice.surface_pressure] for data_slice in data]
 

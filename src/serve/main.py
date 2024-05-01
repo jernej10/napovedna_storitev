@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+from src.models.helpers.model_registry import download_model_registry
 from src.serve.routers import health_router, prediction_router
 
 app = FastAPI()
@@ -17,6 +19,9 @@ app.add_middleware(
 app.include_router(health_router)
 app.include_router(prediction_router)
 
+@app.on_event("startup")
+async def startup_event():
+    download_model_registry()
 
 @app.get("/")
 def root():

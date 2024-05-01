@@ -9,7 +9,9 @@ from dagshub.data_engine.datasources import mlflow
 from mlflow import MlflowClient
 from sklearn.preprocessing import MinMaxScaler
 import dagshub.auth as dh_auth
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def get_latest_model_version(station_number: int):
     try:
