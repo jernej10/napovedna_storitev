@@ -13,8 +13,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
         with:
-          fetch-depth: 0
+          python-version: '3.12'
 
       - name: Prerequisites
         run: |
@@ -26,9 +27,6 @@ jobs:
         run: |
           dvc remote modify origin --local access_key_id ${{ secrets.DVC_ACCESS_KEY_ID }}
           dvc remote modify origin --local secret_access_key ${{ secrets.DVC_SECRET_ACCESS_KEY }}
-
-      - name: DVC pull
-        run: |
           dvc pull -r origin
 
       - name: Pull data
