@@ -27,6 +27,7 @@ tensorflow-model-optimization = "^0.8.0"
 tf-keras = "^2.16.0"
 sqlalchemy = "^2.0.29"
 pyopenssl = "^24.0.0"
+cryptography = "36.0.2"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
