@@ -26,6 +26,9 @@ jobs:
         run: |
           dvc remote modify origin --local access_key_id ${{ secrets.DVC_ACCESS_KEY_ID }}
           dvc remote modify origin --local secret_access_key ${{ secrets.DVC_SECRET_ACCESS_KEY }}
+
+      - name: DVC pull
+        run: |
           dvc pull -r origin
 
       - name: Pull data
