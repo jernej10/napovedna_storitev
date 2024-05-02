@@ -25,6 +25,7 @@ tf2onnx = "^1.16.1"
 onnxruntime = "^1.17.3"
 tensorflow-model-optimization = "^0.8.0"
 tf-keras = "^2.16.0"
+sqlalchemy = "^2.0.29"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
@@ -54,4 +55,6 @@ ks_test = "python3 -m src.data.ks"
 split_data = "python3 -m src.data.split_data"
 train_validation = "python3 -m src.models.train_validation_model"
 predict_validation = "python3 -m src.models.predict_validation_model"
+validate_predictions = "python3 -m src.data.validate_predictions"
+
 

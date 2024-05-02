@@ -2,13 +2,14 @@ from datetime import datetime, timedelta
 from typing import List
 import joblib
 import pandas as pd
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, BackgroundTasks
 from keras.models import load_model
 from pydantic import BaseModel
 import numpy as np
 import requests
 import onnxruntime as ort
 
+from src.serve.helpers.prediction_service import PredictionService
 
 window_size = 2
 
@@ -97,7 +98,7 @@ class PredictionInput(BaseModel):
 
 
 @router.post("/predict/{station_name}")
-def predict(station_name: str, data: List[PredictionInput]):
+def predict(station_name: str, data: List[PredictionInput], background_tasks: BackgroundTasks):
     if len(data) != window_size:
         raise HTTPException(status_code=400, detail=f"Data must contain {window_size} items")
 
@@ -127,6 +128,10 @@ def predict(station_name: str, data: List[PredictionInput]):
     X = create_time_series(scaled_data, window_size, feature_cols)
 
     prediction = use_model_prediction(X, model, scaler, feature_cols)
+
+    n_future = 7
+    background_tasks.add_task(lambda: PredictionService.save(station_number, n_future, prediction))
+
 
     return {"prediction": prediction}
 
