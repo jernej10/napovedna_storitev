@@ -29,5 +29,8 @@ jobs:
         poetry install --with dev --without win-dev
 
     - name: Run tests
+      env:
+        DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+        DATABASE_URI: ${{ secrets.DATABASE_URI }}
       run: |
         poetry run poe test
