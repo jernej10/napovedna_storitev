@@ -40,10 +40,10 @@ jobs:
         run: |
           poetry install --with dev --without win-dev
 
-      - name: Create SQLite Database
-        run: |
-          touch predictions.sqlite
-          working-directory: ${{ github.workspace }}
+      #- name: Create SQLite Database
+      #  run: |
+      #    touch predictions.sqlite
+      #    working-directory: ${{ github.workspace }}
 
       - name: Run tests
         run: |
