@@ -19,19 +19,19 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Docker login
+        run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t mbajk-api .
+        run: docker build -t jernejofic444/mbajk-api .
 
       - name: Push Docker image to Docker Hub
-        run: docker push mbajk-api
+        run: docker push jernejofic444/mbajk-api
 
       - name: Deploy to Northflank
         uses: northflank/deploy-to-northflank@v1
