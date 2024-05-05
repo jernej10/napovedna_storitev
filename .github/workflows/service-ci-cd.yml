@@ -1,4 +1,4 @@
-name: ML Service CI/CD
+name: Deploy pipeline
 
 on:
   push:
@@ -22,7 +22,7 @@ env:
 
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
