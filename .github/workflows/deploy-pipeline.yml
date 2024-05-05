@@ -1,0 +1,33 @@
+name: Deploy Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  NORTHFLANK_API_KEY: your_northflank_api_key
+  PROJECT_ID: your_project_id
+  SERVICE_ID: your_service_id
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t mbajk-api .
+
+      - name: Deploy to Northflank
+        uses: northflank/deploy-to-northflank@v1
+        with:
+          northflank-api-key: ${{ secrets.NORTHFLANK_API_KEY }}
+          project-id: mbajk-service
+          service-id: mbajk-api
+          image-path: mbajk-api
