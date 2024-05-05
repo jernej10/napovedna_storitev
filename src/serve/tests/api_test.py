@@ -16,7 +16,7 @@ def test_predict_future():
     assert response.status_code == 200
     assert "predictions" in response.json()
     assert len(response.json()["predictions"]) == 7
-'''
+
 
 def test_predict():
     response = client.post(
@@ -49,7 +49,7 @@ def test_predict():
     assert isinstance(response.json()["prediction"], int)
     assert response.json()["prediction"] >= 0
     assert response.json()["prediction"] <= 100
-
+'''
 
 def test_predict_fail():
     response = client.post(

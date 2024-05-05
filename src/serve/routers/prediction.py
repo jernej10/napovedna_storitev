@@ -136,7 +136,7 @@ def predict(station_name: str, data: List[PredictionInput], background_tasks: Ba
     return {"prediction": prediction}
 
 @router.post("/predict/{station_name}/{hours}")
-def predict_7_hours(station_name: str, hours: int):
+def predict_7_hours(station_name: str, hours: int, background_tasks: BackgroundTasks):
     # Preberi CSV in izberi zadnje window_size*2 vrstic
     try:
         df = pd.read_csv(f"data/processed/{station_name}.csv")
@@ -164,7 +164,7 @@ def predict_7_hours(station_name: str, hours: int):
         weather_data = fetch_weather_predictions(hours)  # Pridobi vse podatke za vseh 7 ur
         current_weather_data = weather_data.iloc[_]  # Izberi podatke za trenutno uro
         # Napoved za trenutno uro
-        prediction = predict(station_name, data[-window_size:])  # Uporabi zadnja dva elementa
+        prediction = predict(station_name, data[-window_size:], background_tasks)  # Uporabi zadnja dva elementa
         predictions.append(prediction['prediction'])
 
         # Dodaj podatke o vremenu in napoved v 'data' za naslednjo napoved
