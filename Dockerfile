@@ -12,7 +12,7 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock ./
 RUN touch README.md
 
-RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --without dev --without win-dev --no-root
+RUN poetry install --without dev --without win-dev --no-root
 
 FROM python:3.12-slim as runtime
 
