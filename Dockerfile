@@ -18,8 +18,6 @@ FROM python:3.12-slim as runtime
 
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
-    DATABASE_URI="sqlite:///predictions.sqlite"
-
 
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
