@@ -16,9 +16,8 @@ RUN poetry install --without dev --without win-dev --no-root
 
 FROM python:3.12-slim as runtime
 
-ARG DAGSHUB_TOKEN
-
-ENV DAGSHUB_TOKEN=$DAGSHUB_TOKEN
+ENV VIRTUAL_ENV=/app/.venv \
+    PATH="/app/.venv/bin:$PATH"
 
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 

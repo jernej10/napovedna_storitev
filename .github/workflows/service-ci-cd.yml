@@ -52,9 +52,13 @@ jobs:
       - name: Install Railway CLI
         run: bash <(curl -fsSL cli.new)
 
+      - name: Retrieve Railway Secrets
+        run: |
+          export DAGSHUB_TOKEN=$(railway variable:get DAGSHUB_TOKEN)
+
       - name: Deploy to Railway
         run: railway up --service napovedna_storitev
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           DATABASE_URI: sqlite:///predictions.sqlite
-          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+          DAGSHUB_TOKEN: ${{ env.DAGSHUB_TOKEN }}
