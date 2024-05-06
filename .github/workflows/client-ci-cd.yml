@@ -38,6 +38,6 @@ jobs:
         run: bash <(curl -fsSL cli.new)
 
       - name: Deploy to Railway
-        run: railway up --service accurate-stillness
+        run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
