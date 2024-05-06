@@ -56,3 +56,4 @@ jobs:
         run: railway up --service napovedna_storitev
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          DATABASE_URI: sqlite:///predictions.sqlite
