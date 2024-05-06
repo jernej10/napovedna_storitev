@@ -57,3 +57,4 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           DATABASE_URI: sqlite:///predictions.sqlite
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
