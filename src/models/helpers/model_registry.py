@@ -10,6 +10,7 @@ from mlflow import MlflowClient
 from sklearn.preprocessing import MinMaxScaler
 import dagshub.auth as dh_auth
 from dotenv import load_dotenv
+from src.config import settings
 
 load_dotenv()
 
@@ -69,7 +70,7 @@ class ModelType(Enum):
 
 
 def download_model(number: int, model_type: ModelType) -> tuple[str | None, MinMaxScaler | None]:
-    dh_auth.add_app_token(token=os.getenv("DAGSHUB_TOKEN"))
+    dh_auth.add_app_token(token=settings.dagshub_token)
     dagshub.init('napovedna_storitev', 'jernej10', mlflow=True)
     mlflow.set_tracking_uri('https://dagshub.com/jernej10/napovedna_storitev.mlflow')
 
@@ -98,7 +99,7 @@ def download_model(number: int, model_type: ModelType) -> tuple[str | None, MinM
 
 
 def download_model_registry():
-    dh_auth.add_app_token(token=os.getenv("DAGSHUB_TOKEN"))
+    dh_auth.add_app_token(token=settings.dagshub_token)
     dagshub.init('napovedna_storitev', 'jernej10', mlflow=True)
     mlflow.set_tracking_uri('https://dagshub.com/jernej10/napovedna_storitev.mlflow')
 
@@ -122,7 +123,7 @@ def download_model_registry():
 
 
 def empty_model_registry():
-    dh_auth.add_app_token(token=os.getenv("DAGSHUB_TOKEN"))
+    dh_auth.add_app_token(token=settings.dagshub_token)
     dagshub.init('napovedna_storitev', 'jernej10', mlflow=True)
     mlflow.set_tracking_uri('https://dagshub.com/jernej10/napovedna_storitev.mlflow')
 

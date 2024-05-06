@@ -28,6 +28,7 @@ tf-keras = "^2.16.0"
 sqlalchemy = "^2.0.29"
 pyopenssl = "^24.0.0"
 cryptography = "41.0.5"
+pydantic-settings = "^2.2.1"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
