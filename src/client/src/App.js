@@ -14,7 +14,7 @@ function App() {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await axios.post(`http://127.0.0.1:8000/mbajk/predict/${stationName}/${numOfPredictions}`);
+      const response = await axios.post(`https://napovednastoritev-production.up.railway.app/mbajk/predict/${stationName}/${numOfPredictions}`);
       setPredictions(response.data.predictions);
       setLoading(false);
     } catch (error) {
