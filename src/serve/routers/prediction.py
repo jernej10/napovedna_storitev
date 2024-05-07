@@ -139,7 +139,8 @@ def predict(station_name: str, data: List[PredictionInput], background_tasks: Ba
 def predict_7_hours(station_name: str, hours: int, background_tasks: BackgroundTasks):
     # Preberi CSV in izberi zadnje window_size*2 vrstic
     try:
-        df = pd.read_csv(f"data/processed/{station_name}.csv")
+        #df = pd.read_csv(f"data/processed/{station_name}.csv")
+        df = pd.read_csv(f"https://dagshub.com/jernej10/napovedna_storitev/raw/main/data/processed/{station_name}.csv")
         last_rows = df.tail(window_size)
         data = [
             PredictionInput(
