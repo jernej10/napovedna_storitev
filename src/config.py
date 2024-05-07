@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     # dagshub configuration
-    dagshub_token: str
+    DAGSHUB_TOKEN: str
 
     __project_root = pathlib.Path(__file__).resolve().parent.parent
 
